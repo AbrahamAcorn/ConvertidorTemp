@@ -2,8 +2,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 
 class ConverterTemp{
 	public double kelAfah(double kel) {
@@ -47,7 +49,6 @@ class Conversor extends JFrame implements ActionListener{
 		ent=new JTextField(5);
 		ent.addActionListener(this);
 		add(ent);
-		
 		cb1= new JComboBox();
 		cb1.addItem("°Fahrenheit");
 		cb1.addItem("°Celsius");
@@ -73,8 +74,13 @@ class Conversor extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ConverterTemp ct=new ConverterTemp();
-		
-		double dat=Double.parseDouble( ent.getText());
+		//double dat=Double.parseDouble(ent.getText());
+		double dat=0;
+		try {
+			dat=Double.parseDouble( ent.getText());
+		}catch(NumberFormatException e2) {
+			JOptionPane.showMessageDialog(this,"Solo pudes ingresar numeros");
+		}
 		
 		String op1=cb1.getSelectedItem().toString();
 		String op2=cb2.getSelectedItem().toString();
